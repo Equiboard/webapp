@@ -5,6 +5,7 @@
     { "path": "./tsconfig.vite.json" }
   ],
   "compilerOptions": {
+    "jsx": "react-jsx", 
     "checkJs": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
