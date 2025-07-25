@@ -1,1 +1,0 @@
--- Creates tables script for the collections database
