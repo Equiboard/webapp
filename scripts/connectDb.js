@@ -1,11 +1,10 @@
 // scripts/setupDb.js
 import { MongoClient } from "mongodb";
 import "dotenv/config";
+import process from "process";
 
 async function ensureCollection() {
-  // eslint-disable-next-line no-undef
   const uri = process.env.MONGODB_URI;
-  // eslint-disable-next-line no-undef
   const dbName = process.env.MONGODB_DB;
   if (!uri || !dbName) {
     console.log(
