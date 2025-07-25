@@ -18,4 +18,17 @@ export default defineConfig([
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   eslintPluginPrettierRecommended,
+
+  // ← NEW: override react-in-jsx-scope and auto-detect React version
+  {
+    rules: {
+      // disable the old requirement to import React in every JSX file
+      "react/react-in-jsx-scope": "off",
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
 ]);
