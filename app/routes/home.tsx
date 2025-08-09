@@ -1,8 +1,8 @@
+import Header from '~/shared-components/headers';
 import type { Route } from './+types/home';
-import { Welcome } from '../welcome/welcome';
 
 export function meta() {
-    return [{ title: 'New React Router App' }, { name: 'description', content: 'Welcome to React Router!' }];
+    return [{ title: 'EquiBoard' }, { name: 'description', content: 'Welcome to EquiBoard!' }];
 }
 
 export function loader({ context }: Route.LoaderArgs) {
@@ -10,5 +10,9 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
-    return <Welcome message={loaderData.message} />;
+    return (
+        <div>
+            <Header pageType="Dashboard" />
+        </div>
+    );
 }
