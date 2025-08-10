@@ -17,3 +17,9 @@ body {
         color-scheme: dark;
     }
 }
+
+@layer utilities {
+    .container-padding-x {
+        @apply lg:px-12 px-8;
+    }
+}
