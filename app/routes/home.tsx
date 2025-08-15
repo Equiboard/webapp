@@ -12,7 +12,7 @@ export function loader({ context }: Route.LoaderArgs) {
 export default function Home({ loaderData }: Route.ComponentProps) {
     return (
         <div>
-            <Header pageType="Dashboard" />
+            <Header pageType="" />
         </div>
     );
 }
