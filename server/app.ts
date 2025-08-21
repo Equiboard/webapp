@@ -1,10 +1,17 @@
 import 'react-router';
 import { createRequestHandler } from '@react-router/express';
 import express from 'express';
+import { mockData, mockRecentActivity } from './mockData';
+// Dashboard data provider
+const dashboardDataProvider = {
+    getOrganizations: () => mockData,
+    getRecentActivity: () => mockRecentActivity,
+};
 
 declare module 'react-router' {
     interface AppLoadContext {
         VALUE_FROM_EXPRESS: string;
+        dashboardData: typeof dashboardDataProvider;
     }
 }
 
@@ -16,6 +23,7 @@ app.use(
         getLoadContext() {
             return {
                 VALUE_FROM_EXPRESS: 'Hello from Express',
+                dashboardData: dashboardDataProvider,
             };
         },
     })
