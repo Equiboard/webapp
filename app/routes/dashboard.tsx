@@ -1,6 +1,7 @@
 import Header from '~/shared-components/headers';
 import OrgCard from '~/shared-components/org-card';
 import type { Route } from './+types/dashboard';
+import { Link } from 'react-router';
 
 export function meta() {
     return [{ title: 'EquiBoard' }, { name: 'description', content: 'Welcome to EquiBoard!' }];
@@ -21,7 +22,7 @@ export default function Dashboard({ loaderData }: Route.ComponentProps) {
                 <section className="container-padding-x py-8">
                     <div className="flex justify-between">
                         <button>My Organizations</button>
-                        <button>Create New Organization</button>
+                        <Link to="/createOrg"> Create New Organization</Link>
                     </div>
                 </section>
                 <section className="container-padding-x flex flex-col sm:flex-row md:justify-between flex-wrap">
