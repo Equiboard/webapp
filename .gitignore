@@ -7,4 +7,4 @@
 /.react-router/
 /build/
 
-.eslintcache
+*.eslintcache

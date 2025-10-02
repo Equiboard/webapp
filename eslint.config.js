@@ -260,16 +260,4 @@ export default defineConfig([
             'yml/no-empty-mapping-value': 'off',
         },
     },
-    {
-        files: ['**/*.{jsx,tsx}'],
-        rules: {
-            'unicorn/filename-case': [
-                'error',
-                {
-                    case: 'pascalCase',
-                    ignore: [String.raw`.*\.(yaml|yml)$`, String.raw`RequestInProgress\.js$`],
-                },
-            ],
-        },
-    },
 ]);
