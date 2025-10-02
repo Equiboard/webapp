@@ -1,7 +1,7 @@
 import 'react-router';
 import { createRequestHandler } from '@react-router/express';
 import express from 'express';
-import { mockData, mockRecentActivity } from './mockData';
+import { mockData, mockRecentActivity } from './mock-data';
 // Dashboard data provider
 const dashboardDataProvider = {
     getOrganizations: () => mockData,

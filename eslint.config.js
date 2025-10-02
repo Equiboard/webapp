@@ -10,8 +10,10 @@ import yamlPlugin from 'eslint-plugin-yml';
 
 export default defineConfig([
     {
-        files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
         ignores: ['.react-router/**'],
+    },
+    {
+        files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
         plugins: { js },
         extends: ['js/recommended'],
     },
@@ -21,9 +23,17 @@ export default defineConfig([
     },
     tseslint.configs.recommended,
     pluginReact.configs.flat.recommended,
+    {
+        settings: {
+            react: {
+                version: 'detect',
+            },
+        },
+    },
     eslintPluginPrettierRecommended,
     unicorn.configs.recommended,
     {
+        files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
         plugins: {
             '@stylistic': stylistic,
             yml: yamlPlugin,
@@ -219,7 +229,7 @@ export default defineConfig([
             '@stylistic/comma-style': 'error',
             '@stylistic/function-call-spacing': 'error',
             '@stylistic/keyword-spacing': 'error',
-            '@stylistic/linebreak-style': 'error',
+            // '@stylistic/linebreak-style': 'error', // Disabled for cross-platform compatibility
 
             '@stylistic/lines-around-comment': [
                 'error',
@@ -248,6 +258,18 @@ export default defineConfig([
             ],
 
             'yml/no-empty-mapping-value': 'off',
+        },
+    },
+    {
+        files: ['**/*.{jsx,tsx}'],
+        rules: {
+            'unicorn/filename-case': [
+                'error',
+                {
+                    case: 'pascalCase',
+                    ignore: [String.raw`.*\.(yaml|yml)$`, String.raw`RequestInProgress\.js$`],
+                },
+            ],
         },
     },
 ]);

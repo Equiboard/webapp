@@ -1,5 +1,5 @@
 import type { JSX } from 'react';
-import type { IOrgCard } from '~/models/OrgCard.model';
+import type { IOrgCard } from '~/models/org-card.model';
 
 export default function orgCard({ cardProps, addClass }: { cardProps: IOrgCard; addClass: string }): JSX.Element {
     return (

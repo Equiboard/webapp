@@ -1,5 +1,5 @@
-import Header from '~/shared-components/headers';
-import OrgCard from '~/shared-components/org-card';
+import Header from '~/shared-components/Header';
+import OrgCard from '~/shared-components/OrgCard';
 import type { Route } from './+types/dashboard';
 
 export function meta() {

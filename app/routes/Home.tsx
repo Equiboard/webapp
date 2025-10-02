@@ -1,4 +1,4 @@
-import Header from '~/shared-components/headers';
+import Header from '~/shared-components/Header';
 import type { Route } from './+types/home';
 
 export function meta() {
@@ -10,6 +10,7 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home({ loaderData }: Route.ComponentProps) {
+    console.log(loaderData);
     return (
         <div>
             <Header pageType="" />
