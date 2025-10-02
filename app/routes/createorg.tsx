@@ -1,11 +1,11 @@
 import { Form } from 'react-router';
-import Header from '~/shared-components/headers';
-import { mapTextColor } from '~/utils/colors';
+import Header from '@/components/header';
+import { mapTextColor } from '@/utils/colors';
 
 export default function createOrg() {
     return (
         <div className={`bg-primary ${mapTextColor('primary')} flex min-h-screen flex-col font-sans`}>
-            <Header pageType="" />
+            <Header />
 
             <div className="container-padding-x flex flex-1 flex-col items-center justify-center gap-y-8">
                 <Form method="post" className="bg-secondary flex w-full flex-col justify-center gap-y-2 rounded-xl p-4 md:max-w-3/4 md:gap-y-6 md:px-6 md:py-6">

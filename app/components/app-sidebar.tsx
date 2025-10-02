@@ -19,17 +19,17 @@ const data = {
     },
     teams: [
         {
-            name: 'Acme Inc',
+            name: 'Property Management',
             logo: GalleryVerticalEnd,
             plan: 'Enterprise',
         },
         {
-            name: 'Acme Corp.',
+            name: 'Money Management',
             logo: AudioWaveform,
             plan: 'Startup',
         },
         {
-            name: 'Evil Corp.',
+            name: 'Password Hashing',
             logo: Command,
             plan: 'Free',
         },

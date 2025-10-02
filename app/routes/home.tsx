@@ -13,7 +13,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     console.log(loaderData);
     return (
         <div>
-            <Header pageType="" />
+            <Header />
         </div>
     );
 }
