@@ -1,9 +1,10 @@
 'use client';
 
-import { Folder, Forward, MoreHorizontal, Trash2, type LucideIcon } from 'lucide-react';
+import { Folder, Forward, MoreHorizontal, Trash2 } from 'lucide-react';
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuAction, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { SpecificIcon } from '../icon-map';
 
 export function NavProjects({
     projects,
@@ -11,7 +12,7 @@ export function NavProjects({
     projects: {
         name: string;
         url: string;
-        icon: LucideIcon;
+        icon: string;
     }[];
 }) {
     const { isMobile } = useSidebar();
@@ -24,7 +25,7 @@ export function NavProjects({
                     <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton asChild>
                             <a href={item.url}>
-                                <item.icon />
+                                <SpecificIcon iconString={item.icon} />
                                 <span>{item.name}</span>
                             </a>
                         </SidebarMenuButton>

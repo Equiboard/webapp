@@ -1,12 +1,152 @@
-import { AppSidebar } from '@/components/app-sidebar';
+import { AppSidebar } from '@/components/sidebar';
 import Header from '@/components/header';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import type { Route } from './+types/dashboard';
+import { connectToDatabase } from '@/service/database/index.server';
 
-export default function Page() {
+import avavtar from '@/assets/img/avataaars.png';
+import { getUserByEmail } from '@/service/database/models/user.model';
+// This is sample data.
+const data = {
+    user: {
+        name: 'demo',
+        email: 'm@example.com',
+        avatar: avavtar,
+    },
+    teams: [
+        {
+            name: 'Property Management',
+            logo: 'GalleryVerticalEnd',
+            plan: 'Enterprise',
+        },
+        {
+            name: 'Money Management',
+            logo: 'AudioWaveform',
+            plan: 'Startup',
+        },
+        {
+            name: 'Password Hashing',
+            logo: 'Command',
+            plan: 'Free',
+        },
+    ],
+    navMain: [
+        {
+            title: 'Playground',
+            url: '#',
+            icon: 'SquareTerminal',
+            isActive: true,
+            items: [
+                {
+                    title: 'History',
+                    url: '#',
+                },
+                {
+                    title: 'Starred',
+                    url: '#',
+                },
+                {
+                    title: 'Settings',
+                    url: '#',
+                },
+            ],
+        },
+        {
+            title: 'Models',
+            url: '#',
+            icon: 'Bot',
+            items: [
+                {
+                    title: 'Genesis',
+                    url: '#',
+                },
+                {
+                    title: 'Explorer',
+                    url: '#',
+                },
+                {
+                    title: 'Quantum',
+                    url: '#',
+                },
+            ],
+        },
+        {
+            title: 'Documentation',
+            url: '#',
+            icon: 'BookOpen',
+            items: [
+                {
+                    title: 'Introduction',
+                    url: '#',
+                },
+                {
+                    title: 'Get Started',
+                    url: '#',
+                },
+                {
+                    title: 'Tutorials',
+                    url: '#',
+                },
+                {
+                    title: 'Changelog',
+                    url: '#',
+                },
+            ],
+        },
+        {
+            title: 'Settings',
+            url: '#',
+            icon: 'Settings2',
+            items: [
+                {
+                    title: 'General',
+                    url: '#',
+                },
+                {
+                    title: 'Team',
+                    url: '#',
+                },
+                {
+                    title: 'Billing',
+                    url: '#',
+                },
+                {
+                    title: 'Limits',
+                    url: '#',
+                },
+            ],
+        },
+    ],
+    projects: [
+        {
+            name: 'Design Engineering',
+            url: '#',
+            icon: 'Frame',
+        },
+        {
+            name: 'Sales & Marketing',
+            url: '#',
+            icon: 'PieChart',
+        },
+        {
+            name: 'Travel',
+            url: '#',
+            icon: 'Map',
+        },
+    ],
+};
+export async function loader() {
+    await connectToDatabase();
+    const user = await getUserByEmail('user@equiboard.com');
+    return { ...data, user: { ...data.user, email: user?.email } };
+}
+
+export default function Page({ loaderData }: Route.ComponentProps) {
+    console.log(loaderData);
     return (
         <SidebarProvider>
-            <AppSidebar />
+            <AppSidebar data={loaderData} />
             <SidebarInset>
                 <header className="flex h-16 w-full shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
                     <div className="flex w-full items-center gap-2 px-4">

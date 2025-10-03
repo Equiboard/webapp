@@ -1,4 +1,4 @@
-import type { IOrgCard } from '~/models/org-card.model';
+import type { IOrgCard } from '@/types';
 
 export const mockData: IOrgCard[] = [
     {

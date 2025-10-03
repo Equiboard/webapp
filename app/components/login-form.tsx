@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import login from '@/assets/img/login.jpg';
-export default function LoginForm({ className, ...props }: React.ComponentProps<'div'>) {
+export default function LoginForm({ className, toggleSignin, ...props }: React.ComponentProps<'div'> & { toggleSignin: () => void }) {
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
             <Card className="overflow-hidden p-0">
@@ -65,9 +65,9 @@ export default function LoginForm({ className, ...props }: React.ComponentProps<
                             </div>
                             <div className="text-center text-sm">
                                 Don&apos;t have an account?{' '}
-                                <a href="#" className="underline underline-offset-4">
+                                <button className="cursor-pointer underline underline-offset-4" onClick={toggleSignin}>
                                     Sign up
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </form>
