@@ -3,34 +3,48 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import login_img from '@/assets/img/login.jpg';
-export default function LoginForm({ className, toggleSignin, ...props }: React.ComponentProps<'div'> & { toggleSignin: () => void }) {
+import sign_up_img from '@/assets/img/sign-up.jpg';
+export default function SignUpForm({ className, toggleSignin, ...props }: React.ComponentProps<'div'> & { toggleSignin: () => void }) {
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
             <Card className="overflow-hidden p-0">
                 <CardContent className="grid p-0 md:grid-cols-2">
+                    <div className="bg-muted relative hidden md:block">
+                        <img loading="eager" src={sign_up_img} alt="Image" className="absolute inset-0 h-full w-full object-cover" />
+                    </div>
                     <form method="post" className="p-6 md:p-8">
-                        <input type="hidden" name="intent" value="login" />
-                        <div className="flex flex-col gap-6">
+                        <input type="hidden" name="intent" value="signup" />
+                        <div className="flex flex-col gap-3">
                             <div className="flex flex-col items-center text-center">
-                                <h1 className="text-2xl font-bold">Welcome back</h1>
-                                <p className="text-muted-foreground text-balance">Login to your EquiBoard account</p>
+                                <h1 className="text-2xl font-bold">Sign Up</h1>
+                                <p className="text-muted-foreground text-balance">Create your EquiBoard account</p>
                             </div>
-                            <div className="grid gap-3">
-                                <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" placeholder="John@equiboard.com" required name="email" />
-                            </div>
-                            <div className="grid gap-3">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Password</Label>
-                                    <a href="#" className="ml-auto text-sm underline-offset-2 hover:underline">
-                                        Forgot your password?
-                                    </a>
+                            <div className="flex gap-2">
+                                <div className="grid gap-2">
+                                    <Label htmlFor="first">First Name</Label>
+                                    <Input id="first" type="text" placeholder="John" required name="first" />
                                 </div>
-                                <Input id="password" type="password" required name="password" />
+                                <div className="grid gap-2">
+                                    <Label htmlFor="last">Last name</Label>
+                                    <Input id="last" type="text" placeholder="Wick" required name="last" />
+                                </div>
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input id="emailSignUp" type="email" placeholder="John@equiboard.com" required name="email" />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="password">Password</Label>
+
+                                <Input id="passwordSignUp" type="password" required name="password" />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="cpassword">Confirm Password</Label>
+
+                                <Input id="cpasswordSignUp" type="password" required name="cpassword" />
                             </div>
                             <Button type="submit" className="w-full">
-                                Login
+                                SignUp
                             </Button>
                             <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                                 <span className="bg-card text-muted-foreground relative z-10 px-2">Or continue with</span>
@@ -65,16 +79,13 @@ export default function LoginForm({ className, toggleSignin, ...props }: React.C
                                 </Button>
                             </div>
                             <div className="text-center text-sm">
-                                Don&apos;t have an account?{' '}
+                                Already have an account ?{' '}
                                 <button type="button" className="cursor-pointer underline underline-offset-4" onClick={toggleSignin}>
-                                    Sign up
+                                    Login
                                 </button>
                             </div>
                         </div>
                     </form>
-                    <div className="bg-muted relative hidden md:block">
-                        <img loading="eager" src={login_img} alt="Image" className="absolute inset-0 h-full w-full object-cover" />
-                    </div>
                 </CardContent>
             </Card>
             <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">

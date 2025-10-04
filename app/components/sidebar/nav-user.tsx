@@ -3,6 +3,7 @@ import { BadgeCheck, Bell, ChevronsUpDown, CreditCard, LogOut, Sparkles } from '
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { useFetcher } from 'react-router';
 
 export function NavUser({
     user,
@@ -14,7 +15,7 @@ export function NavUser({
     };
 }) {
     const { isMobile } = useSidebar();
-
+    const fetcher = useFetcher();
     return (
         <SidebarMenu>
             <SidebarMenuItem>
@@ -68,7 +69,7 @@ export function NavUser({
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => fetcher.submit({}, { method: 'post', action: '/logout' })}>
                             <LogOut />
                             Log out
                         </DropdownMenuItem>
