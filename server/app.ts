@@ -1,4 +1,4 @@
-import 'react-router';
+import { RouterContextProvider } from 'react-router';
 import { createRequestHandler } from '@react-router/express';
 import express from 'express';
 import { mockData, mockRecentActivity } from './mock-data';
