@@ -1,3 +1,4 @@
 #### Attributes
-1. Login Page Image by <a href="https://unsplash.com/@yente95?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Yente Van Eynde</a> on <a href="https://unsplash.com/photos/two-people-on-paddle-boards-in-the-water-cIJ6ABNA6H8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+1. Login Page Photo by <a href="https://unsplash.com/@yente95?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Yente Van Eynde</a> on <a href="https://unsplash.com/photos/two-people-on-paddle-boards-in-the-water-cIJ6ABNA6H8?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+2. Sign Up Page Photo by <a href="https://unsplash.com/@pic_nolte?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Christoph Nolte</a> on <a href="https://unsplash.com/photos/a-bird-flies-gracefully-through-the-sky-_6sc3AzkEyA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
       

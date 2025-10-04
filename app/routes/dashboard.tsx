@@ -6,7 +6,9 @@ import type { Route } from './+types/dashboard';
 import { connectToDatabase } from '@/service/database/index.server';
 
 import avavtar from '@/assets/img/avataaars.png';
-import { getUserByEmail } from '@/service/database/models/user.model';
+import { authMiddleware } from '@/middleware/auth.server';
+import { userContext } from '@/context/user.context';
+
 // This is sample data.
 const data = {
     user: {
@@ -136,14 +138,16 @@ const data = {
         },
     ],
 };
-export async function loader() {
+export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
+
+export async function loader({ context }: Route.LoaderArgs) {
     await connectToDatabase();
-    const user = await getUserByEmail('user@equiboard.com');
+    const user = context.get(userContext);
     return { ...data, user: { ...data.user, email: user?.email } };
 }
 
 export default function Page({ loaderData }: Route.ComponentProps) {
-    console.log(loaderData);
+    // console.log(loaderData);
     return (
         <SidebarProvider>
             <AppSidebar data={loaderData} />

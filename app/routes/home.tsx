@@ -14,6 +14,7 @@ export default function Home({ loaderData }: Route.ComponentProps) {
     return (
         <div>
             <Header />
+            <div id="hero" className=""></div>
         </div>
     );
 }
