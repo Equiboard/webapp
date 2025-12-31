@@ -1,7 +1,18 @@
 import mongoose from 'mongoose';
 import { OrganizationSchema } from '../schema';
+import type { CreateIOrg, IOrg } from '@/types/org.types';
 
 const Organization = mongoose.models.Organization || mongoose.model('Organization', OrganizationSchema);
+
+export async function createOrganization(orgDetails: CreateIOrg): Promise<Partial<IOrg> & { _id: string }> {
+    try {
+        const org = await Organization.create(orgDetails);
+        return org;
+    } catch (error) {
+        console.error('Error creating Org:', error);
+        throw error;
+    }
+}
 
 export async function getOrganizationMembers(orgId: mongoose.Types.ObjectId) {
     try {

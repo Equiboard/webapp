@@ -143,7 +143,7 @@ export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
 export async function loader({ context }: Route.LoaderArgs) {
     await connectToDatabase();
     const user = context.get(userContext);
-    return { ...data, user: { ...data.user, email: user?.email } };
+    return { ...data, user };
 }
 
 export default function Page({ loaderData }: Route.ComponentProps) {

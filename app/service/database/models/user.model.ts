@@ -9,7 +9,21 @@ export async function getUserOrgs(userId: mongoose.Types.ObjectId) {
         const user = await UserModel.findOne({ _id: userId });
         return user ? user.organizations : [];
     } catch (error) {
-        console.error('Error fetching user organizations:', error);
+        console.error('Error fetching userOrg by id:', error);
+        throw error;
+    }
+}
+export async function addOrgToUser(userId: string, organizationId: string) {
+    try {
+        const user = await UserModel.updateOne(
+            { _id: userId },
+            {
+                $addToSet: { organizations: { organizationId, joinedAt: new Date(), isActive: true } },
+            }
+        );
+        return user;
+    } catch (error) {
+        console.error('Error fetching userOrg by id:', error);
         throw error;
     }
 }
@@ -18,7 +32,7 @@ export async function getUserByEmail(email: string) {
         const user = await UserModel.findOne({ email });
         return user ?? null;
     } catch (error) {
-        console.error('Error fetching user organizations:', error);
+        console.error('Error fetching user by email:', error);
         throw error;
     }
 }
@@ -27,7 +41,7 @@ export async function getUserBy_ID(_id: mongoose.Types.ObjectId) {
         const user = await UserModel.findOne({ _id });
         return user ?? null;
     } catch (error) {
-        console.error('Error fetching user organizations:', error);
+        console.error('Error fetching user by ID:', error);
         throw error;
     }
 }
