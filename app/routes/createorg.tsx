@@ -8,6 +8,7 @@ import { createOrganization } from '@/service/database/models/organization.model
 import { authMiddleware } from '@/middleware/auth.server';
 import { userContext } from '@/context/user.context';
 import { addOrgToUser } from '@/service/database/models/user.model';
+import { logger } from '@/utils/logger';
 
 export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
 
@@ -22,7 +23,7 @@ export async function action({ request, context }: Route.ActionArgs) {
     const title = formData.get('ProjectTitle')?.toString();
     const summary = formData.get('ProjectSummary')?.toString();
     const members = formData.getAll('tmList');
-    console.log(title, summary, members);
+    logger.debug(title, summary, members);
     if (!title || !summary || !members) {
         return { error: 'Invalid form' };
     }
@@ -64,7 +65,7 @@ export default function createOrg() {
         for (const member of members) {
             totalForm.append('tmList', member.toString());
         }
-        console.log('Submitting ');
+        logger.debug('Submitting ');
         submit(totalForm, { method: 'post', action: '.' });
     };
     const addMember = () => {
@@ -87,7 +88,7 @@ export default function createOrg() {
                 memberInput.current.value = '';
             } else {
                 // Should show error
-                console.log('Pattern for email does not match');
+                logger.error('Pattern for email does not match');
             }
         }
     };

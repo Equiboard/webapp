@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import sign_up_img from '@/assets/img/sign-up.jpg';
+import { Form } from 'react-router';
 export default function SignUpForm({ className, toggleSignin, ...props }: React.ComponentProps<'div'> & { toggleSignin: () => void }) {
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
@@ -12,7 +13,7 @@ export default function SignUpForm({ className, toggleSignin, ...props }: React.
                     <div className="bg-muted relative hidden md:block">
                         <img loading="eager" src={sign_up_img} alt="Image" className="absolute inset-0 h-full w-full object-cover" />
                     </div>
-                    <form method="post" className="p-6 md:p-8">
+                    <Form method="post" className="p-6 md:p-8">
                         <input type="hidden" name="intent" value="signup" />
                         <div className="flex flex-col gap-3">
                             <div className="flex flex-col items-center text-center">
@@ -85,7 +86,7 @@ export default function SignUpForm({ className, toggleSignin, ...props }: React.
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </Form>
                 </CardContent>
             </Card>
             <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">

@@ -1,6 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { UserSchema } from '../schema/user.schema';
 import type { IUser } from '@/types';
+import { logger } from '@/utils/logger';
 
 const UserModel: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
 
@@ -9,7 +10,7 @@ export async function getUserOrgs(userId: mongoose.Types.ObjectId) {
         const user = await UserModel.findOne({ _id: userId });
         return user ? user.organizations : [];
     } catch (error) {
-        console.error('Error fetching userOrg by id:', error);
+        logger.error(error, 'Error fetching userOrg by id:');
         throw error;
     }
 }
@@ -23,7 +24,7 @@ export async function addOrgToUser(userId: string, organizationId: string) {
         );
         return user;
     } catch (error) {
-        console.error('Error fetching userOrg by id:', error);
+        logger.error(error, 'Error fetching userOrg by id:');
         throw error;
     }
 }
@@ -32,7 +33,7 @@ export async function getUserByEmail(email: string) {
         const user = await UserModel.findOne({ email });
         return user ?? null;
     } catch (error) {
-        console.error('Error fetching user by email:', error);
+        logger.error(error, 'Error fetching user by email:');
         throw error;
     }
 }
@@ -41,7 +42,7 @@ export async function getUserBy_ID(_id: mongoose.Types.ObjectId) {
         const user = await UserModel.findOne({ _id });
         return user ?? null;
     } catch (error) {
-        console.error('Error fetching user by ID:', error);
+        logger.error(error, 'Error fetching user by ID:');
         throw error;
     }
 }
@@ -51,9 +52,9 @@ export async function userSignUp(userData: Partial<IUser>) {
         return await UserModel.create(userData);
     } catch (error) {
         if (error instanceof mongoose.Error) {
-            throw new TypeError('Error in signup', error);
+            throw new TypeError('Error in signup');
         }
-        console.error('Error in signUp for user', userData, error);
+        logger.error(userData, 'Error in signUp for user');
         throw error;
     }
 }
