@@ -1,10 +1,6 @@
 import { logout } from '@/service/session.server';
-import { redirect } from 'react-router';
 import type { Route } from './+types/logout';
 
-export async function action({ request }: Route.ActionArgs) {
+export async function loader({ request }: Route.LoaderArgs) {
     return await logout(request);
-}
-export function loader() {
-    return redirect('/');
 }

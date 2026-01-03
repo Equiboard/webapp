@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { AuditLogSchema } from '../schema';
+import { logger } from '@/utils/logger';
 
 const AuditLog = mongoose.models.AuditLog || mongoose.model('AuditLog', AuditLogSchema);
 
@@ -7,7 +8,7 @@ export async function getAuditLogsByOrg(orgId: mongoose.Types.ObjectId) {
     try {
         return await AuditLog.find({ orgId: orgId.toString() }).sort({ createdAt: -1 });
     } catch (error) {
-        console.error('Error fetching audit logs:', error);
+        logger.error(error, 'Error fetching audit logs:');
         throw error;
     }
 }
@@ -20,7 +21,7 @@ export async function getAuditLogsByUser(userId: mongoose.Types.ObjectId, orgId?
         }
         return await AuditLog.find(query).sort({ createdAt: -1 });
     } catch (error) {
-        console.error('Error fetching audit logs by user:', error);
+        logger.error(error, 'Error fetching audit logs by user:');
         throw error;
     }
 }
@@ -33,7 +34,7 @@ export async function getAuditLogsByEntity(entityType: string, entityId: string,
         }
         return await AuditLog.find(query).sort({ createdAt: -1 });
     } catch (error) {
-        console.error('Error fetching audit logs by entity:', error);
+        logger.error(error, 'Error fetching audit logs by entity:');
         throw error;
     }
 }
@@ -43,7 +44,7 @@ export async function createAuditLog(logData: Record<string, unknown>) {
         const auditLog = new AuditLog(logData);
         return await auditLog.save();
     } catch (error) {
-        console.error('Error creating audit log:', error);
+        logger.error(error, 'Error creating audit log:');
         throw error;
     }
 }

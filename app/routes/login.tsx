@@ -7,7 +7,8 @@ import { useCallback, useLayoutEffect, useRef } from 'react';
 import SignUpForm from '@/components/signup-form';
 import { createUserSession } from '@/service/session.server';
 import type { IUser } from '@/types';
-import { useSearchParams } from 'react-router';
+import { useActionData, useSearchParams } from 'react-router';
+import { logger } from '@/utils/logger';
 
 export function meta() {
     return [{ title: 'EquiBoard' }, { name: 'description', content: 'Login to EquiBoard' }];
@@ -16,11 +17,11 @@ export function meta() {
 export async function action({ request }: Route.ActionArgs) {
     await connectToDatabase();
     const formData = await request.formData();
-    console.log(formData);
+    logger.debug({ formData: [...formData.entries()] }, 'formData');
     const intent = formData.get('intent')?.toString();
     const email = formData.get('email')?.toString();
     const password = formData.get('password')?.toString();
-    console.log(email, password);
+    logger.debug({ email, password }, 'Login Details');
 
     if (!email || !password) {
         return { error: 'Email and password required' };
@@ -32,7 +33,7 @@ export async function action({ request }: Route.ActionArgs) {
                 error: 'Email already registered. Please Login',
             };
         } else {
-            console.log('Email not found');
+            logger.debug('Email not found');
             const firstName = formData.get('first')?.toString();
             const lastName = formData.get('last')?.toString();
             const confirmPassword = formData.get('cpassword')?.toString();
@@ -62,10 +63,12 @@ export function loader({ context }: Route.LoaderArgs) {
     return { message: context.VALUE_FROM_EXPRESS };
 }
 
-export default function Login({ actionData }: Route.ComponentProps) {
+export default function Login() {
     const [searchParams, setSearchParams] = useSearchParams();
     const cardWrapper = useRef<HTMLDivElement>(null);
-
+    const actionData = useActionData();
+    logger.debug(actionData, 'actionData Login');
+    // console.log('actionData on login', actionData);
     useLayoutEffect(() => {
         const signUpIntent = searchParams?.get('tab') === 'signup';
         if (signUpIntent && cardWrapper.current) {
@@ -86,8 +89,6 @@ export default function Login({ actionData }: Route.ComponentProps) {
             return searchParams;
         });
     }, [cardWrapper, setSearchParams]);
-
-    console.error(actionData?.error);
 
     return (
         <>

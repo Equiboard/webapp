@@ -4,12 +4,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import login_img from '@/assets/img/login.jpg';
+import { Form } from 'react-router';
 export default function LoginForm({ className, toggleSignin, ...props }: React.ComponentProps<'div'> & { toggleSignin: () => void }) {
     return (
         <div className={cn('flex flex-col gap-6', className)} {...props}>
             <Card className="overflow-hidden p-0">
                 <CardContent className="grid p-0 md:grid-cols-2">
-                    <form method="post" className="p-6 md:p-8">
+                    <Form method="post" className="p-6 md:p-8">
                         <input type="hidden" name="intent" value="login" />
                         <div className="flex flex-col gap-6">
                             <div className="flex flex-col items-center text-center">
@@ -71,7 +72,7 @@ export default function LoginForm({ className, toggleSignin, ...props }: React.C
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </Form>
                     <div className="bg-muted relative hidden md:block">
                         <img loading="eager" src={login_img} alt="Image" className="absolute inset-0 h-full w-full object-cover" />
                     </div>

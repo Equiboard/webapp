@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { IntegrationSchema } from '../schema';
+import { logger } from '@/utils/logger';
 
 const Integration = mongoose.models.Integration || mongoose.model('Integration', IntegrationSchema);
 
@@ -7,7 +8,7 @@ export async function getIntegrationsByOrg(orgId: mongoose.Types.ObjectId) {
     try {
         return await Integration.find({ orgId: orgId.toString() });
     } catch (error) {
-        console.error('Error fetching integrations:', error);
+        logger.error(error, 'Error fetching integrations:');
         throw error;
     }
 }
@@ -16,7 +17,7 @@ export async function getActiveIntegrations(orgId: mongoose.Types.ObjectId) {
     try {
         return await Integration.find({ orgId: orgId.toString(), status: 'active' });
     } catch (error) {
-        console.error('Error fetching active integrations:', error);
+        logger.error(error, 'Error fetching active integrations:');
         throw error;
     }
 }
@@ -25,7 +26,7 @@ export async function getIntegrationByType(orgId: mongoose.Types.ObjectId, type:
     try {
         return await Integration.findOne({ orgId: orgId.toString(), type });
     } catch (error) {
-        console.error('Error fetching integration by type:', error);
+        logger.error(error, 'Error fetching integration by type:');
         throw error;
     }
 }
@@ -34,7 +35,7 @@ export async function updateIntegrationStatus(integrationId: mongoose.Types.Obje
     try {
         return await Integration.findByIdAndUpdate(integrationId, { status }, { new: true });
     } catch (error) {
-        console.error('Error updating integration status:', error);
+        logger.error(error, 'Error updating integration status:');
         throw error;
     }
 }
@@ -43,7 +44,7 @@ export async function updateIntegrationConfig(integrationId: mongoose.Types.Obje
     try {
         return await Integration.findByIdAndUpdate(integrationId, { config }, { new: true });
     } catch (error) {
-        console.error('Error updating integration config:', error);
+        logger.error(error, 'Error updating integration config:');
         throw error;
     }
 }

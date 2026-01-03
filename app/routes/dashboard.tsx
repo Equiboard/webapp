@@ -147,7 +147,6 @@ export async function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Page({ loaderData }: Route.ComponentProps) {
-    // console.log(loaderData);
     return (
         <SidebarProvider>
             <AppSidebar data={loaderData} />

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { ContributionSchema } from '../schema';
+import { logger } from '@/utils/logger';
 
 const Contribution = mongoose.models.Contribution || mongoose.model('Contribution', ContributionSchema);
 
@@ -7,7 +8,7 @@ export async function getContributionsByOrg(orgId: mongoose.Types.ObjectId) {
     try {
         return await Contribution.find({ orgId: orgId.toString() });
     } catch (error) {
-        console.error('Error fetching contributions:', error);
+        logger.error(error, 'Error fetching contributions:');
         throw error;
     }
 }
@@ -20,7 +21,7 @@ export async function getContributionsByUser(userId: mongoose.Types.ObjectId, or
         }
         return await Contribution.find(query);
     } catch (error) {
-        console.error('Error fetching user contributions:', error);
+        logger.error(error, 'Error fetching user contributions:');
         throw error;
     }
 }
@@ -29,7 +30,7 @@ export async function getContributionsByCriteria(criteriaId: string, orgId: mong
     try {
         return await Contribution.find({ criteriaId, orgId: orgId.toString() });
     } catch (error) {
-        console.error('Error fetching contributions by criteria:', error);
+        logger.error(error, 'Error fetching contributions by criteria:');
         throw error;
     }
 }
@@ -38,7 +39,7 @@ export async function addApprovalToContribution(contributionId: mongoose.Types.O
     try {
         return await Contribution.findByIdAndUpdate(contributionId, { $push: { approvals: approvalData } }, { new: true });
     } catch (error) {
-        console.error('Error adding approval to contribution:', error);
+        logger.error(error, 'Error adding approval to contribution:');
         throw error;
     }
 }
@@ -47,7 +48,7 @@ export async function updateContributionStatus(contributionId: mongoose.Types.Ob
     try {
         return await Contribution.findByIdAndUpdate(contributionId, { status }, { new: true });
     } catch (error) {
-        console.error('Error updating contribution status:', error);
+        logger.error(error, 'Error updating contribution status:');
         throw error;
     }
 }

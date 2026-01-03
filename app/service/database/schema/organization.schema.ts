@@ -3,11 +3,13 @@ import { Schema } from 'mongoose';
 export const OrganizationSchema = new Schema(
     {
         name: String,
+        summary: String,
         creatorId: String,
         onboardingPhaseClosed: { type: Boolean, default: false },
         members: [
             {
                 userId: String,
+                email: String,
                 role: String,
                 equityPercentage: Number,
                 joinedAt: Date,

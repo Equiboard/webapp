@@ -1,3 +1,4 @@
+import { logger } from '@/utils/logger';
 import mongoose from 'mongoose';
 
 let isConnected = false;
@@ -13,10 +14,10 @@ export async function connectToDatabase() {
             minPoolSize: 2, // Minimum 2 connections
             maxIdleTimeMS: 30000, // Close connections after 30s idle
         });
-        console.log('Connected to MongoDB');
+        logger.debug('Connected to MongoDB');
         isConnected = true;
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
+        logger.error('Error connecting to MongoDB:' + error);
         throw error;
     }
 }

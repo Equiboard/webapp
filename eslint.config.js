@@ -67,7 +67,7 @@ export default defineConfig([
             ],
 
             'default-case-last': 'error',
-            // 'no-console': 'error',
+            'no-console': 'error',
             'no-eval': 'error',
             'no-extend-native': 'error',
             'no-extra-label': 'error',
