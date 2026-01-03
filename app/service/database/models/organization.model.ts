@@ -3,9 +3,10 @@ import { OrganizationSchema } from '../schema';
 import type { CreateIOrg, IOrg } from '@/types/org.types';
 import { logger } from '@/utils/logger';
 
+// Get the Organiztion model if already registered with mongoose Client, else create one from the schema
 const Organization = mongoose.models.Organization || mongoose.model('Organization', OrganizationSchema);
 
-export async function createOrganization(orgDetails: CreateIOrg): Promise<Partial<IOrg> & { _id: string }> {
+export async function createOrganization(orgDetails: Partial<CreateIOrg>): Promise<Partial<IOrg> & { _id: mongoose.Types.ObjectId }> {
     try {
         const org = await Organization.create(orgDetails);
         return org;
@@ -43,5 +44,12 @@ export async function addMemberToOrg(orgId: mongoose.Types.ObjectId, memberData:
         throw error;
     }
 }
-
+export async function findOrgById(orgId: string): Promise<(Partial<IOrg> & { _id: mongoose.Types.ObjectId }) | null> {
+    try {
+        return await Organization.findById(orgId);
+    } catch (error) {
+        logger.error(error, 'Error finding Organization');
+        throw error;
+    }
+}
 export default Organization;

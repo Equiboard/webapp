@@ -1,12 +1,21 @@
 import mongoose from 'mongoose';
 import { InvitationSchema } from '../schema';
 import { logger } from '@/utils/logger';
+import type { IInvitation } from '@/types/invitation.types';
 
 const Invitation = mongoose.models.Invitation || mongoose.model('Invitation', InvitationSchema);
 
+export async function addInvitations(invite: Partial<IInvitation>) {
+    try {
+        return await Invitation.insertOne(invite);
+    } catch (error) {
+        logger.error(error, 'Error fetching invitations:');
+        throw error;
+    }
+}
 export async function getInvitationsByOrg(orgId: mongoose.Types.ObjectId) {
     try {
-        return await Invitation.find({ orgId: orgId.toString() });
+        return await Invitation.find({ orgId });
     } catch (error) {
         logger.error(error, 'Error fetching invitations:');
         throw error;
