@@ -52,10 +52,10 @@ export function TeamSwitcher({
                         ))}
                         <DropdownMenuSeparator />
                         <DropdownMenuItem className="gap-2 p-2">
-                            <div className="flex size-6 items-center justify-center rounded-md border bg-transparent">
-                                <Plus className="size-4" />
-                            </div>
-                            <Link to={'/createorg'} className="text-muted-foreground font-medium">
+                            <Link to={'/createorg'} className="flex items-center gap-2">
+                                <div className="flex size-6 items-center justify-center rounded-md border">
+                                    <Plus className="size-4" />
+                                </div>
                                 Add team
                             </Link>
                         </DropdownMenuItem>
