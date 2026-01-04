@@ -17,5 +17,7 @@ export async function authMiddleware({ request, context }: any) {
     logger.debug('USER FOUND:' + !!user);
     if (user) {
         context.set(userContext, user);
+    } else {
+        throw redirect('/login');
     }
 }

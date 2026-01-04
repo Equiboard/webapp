@@ -143,7 +143,18 @@ export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
 export async function loader({ context }: Route.LoaderArgs) {
     await connectToDatabase();
     const user = context.get(userContext);
-    return { ...data, user: { ...data.user, email: user?.email } };
+    const firstName = user?.first_name || '';
+    const lastName = user?.last_name || '';
+    const displayName = firstName && lastName ? `${firstName} ${lastName}` : user?.email?.split('@')[0] || 'User';
+
+    return {
+        ...data,
+        user: {
+            name: displayName,
+            email: user?.email || '',
+            avatar: data.user.avatar,
+        },
+    };
 }
 
 export default function Page({ loaderData }: Route.ComponentProps) {

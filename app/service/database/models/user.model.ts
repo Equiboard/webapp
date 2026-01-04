@@ -58,4 +58,13 @@ export async function userSignUp(userData: Partial<IUser>) {
         throw error;
     }
 }
+export async function updateUserProfile(userId: string, updateData: Partial<IUser>) {
+    try {
+        const user = await UserModel.findByIdAndUpdate(userId, updateData, { new: true });
+        return user;
+    } catch (error) {
+        logger.error(error, 'Error updating user profile:');
+        throw error;
+    }
+}
 export default UserModel;
