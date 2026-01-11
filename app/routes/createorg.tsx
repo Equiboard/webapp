@@ -12,7 +12,9 @@ import { logger } from '@/utils/logger';
 import { addInvitations } from '@/service/database/models/invitation.model';
 
 export const middleware: Route.MiddlewareFunction[] = [authMiddleware];
-
+export function meta() {
+    return [{ title: 'Create Org - EquiBoard' }, { name: 'description', content: 'Create a new organization' }];
+}
 export async function action({ request, context }: Route.ActionArgs) {
     // Here you can handle the form submission, e.g., save the organization details to the database
     await connectToDatabase();

@@ -6,6 +6,11 @@ export const OrganizationSchema = new Schema(
         summary: String,
         creatorId: String,
         onboardingPhaseClosed: { type: Boolean, default: false },
+        onboardingStep: {
+            type: String,
+            enum: ['memberBoarding', 'criteriaDefination', 'userSkills', 'voting'],
+            default: 'memberBoarding',
+        },
         members: [
             {
                 userId: String,
